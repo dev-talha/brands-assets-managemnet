@@ -218,34 +218,49 @@ function openResizeDrawer(url, filename) {
     document.getElementById('resize-drawer').classList.remove('hidden');
     document.body.style.overflow = 'hidden';
     
-    const img = new Image();
-    if (url.startsWith('http') && !url.includes(window.location.host)) {
-        img.crossOrigin = "Anonymous";
-    }
-    img.onload = () => {
-        resizeOriginalImage = img;
-        resizeOriginalAspectRatio = img.width / img.height;
-        
-        document.getElementById('resize-width').value = img.width;
-        document.getElementById('resize-height').value = img.height;
-        
-        const formatSelect = document.getElementById('resize-format');
-        if (url.toLowerCase().endsWith('.jpg') || url.toLowerCase().endsWith('.jpeg')) {
-            formatSelect.value = 'image/jpeg';
-        } else if (url.toLowerCase().endsWith('.webp')) {
-            formatSelect.value = 'image/webp';
-        } else {
-            formatSelect.value = 'image/png';
-        }
-        
-        handleFormatChange();
-        updateResizeCanvas();
-    };
-    img.onerror = () => {
-        alert("Failed to load the image for resizing. Please ensure the image exists and is accessible.");
-        closeResizeDrawer();
-    };
-    img.src = url;
+    fetch(url)
+        .then(response => {
+            if (!response.ok) throw new Error("Network response was not ok");
+            return response.blob();
+        })
+        .then(blob => {
+            const objectUrl = URL.createObjectURL(blob);
+            const img = new Image();
+            img.onload = () => {
+                resizeOriginalImage = img;
+                // Fallback dimensions for SVGs that lack intrinsic width/height
+                const w = img.width || 800;
+                const h = img.height || Math.round(800 * (img.height/img.width || 0.75));
+                
+                resizeOriginalAspectRatio = w / h;
+                
+                document.getElementById('resize-width').value = w;
+                document.getElementById('resize-height').value = h;
+                
+                const formatSelect = document.getElementById('resize-format');
+                if (url.toLowerCase().endsWith('.jpg') || url.toLowerCase().endsWith('.jpeg')) {
+                    formatSelect.value = 'image/jpeg';
+                } else if (url.toLowerCase().endsWith('.webp')) {
+                    formatSelect.value = 'image/webp';
+                } else {
+                    formatSelect.value = 'image/png';
+                }
+                
+                handleFormatChange();
+                updateResizeCanvas();
+                URL.revokeObjectURL(objectUrl);
+            };
+            img.onerror = () => {
+                alert("Failed to render the image. The file might be corrupted or an invalid SVG.");
+                closeResizeDrawer();
+                URL.revokeObjectURL(objectUrl);
+            };
+            img.src = objectUrl;
+        })
+        .catch(err => {
+            alert("Failed to fetch the image from the server. URL: " + url + "\nError: " + err.message);
+            closeResizeDrawer();
+        });
 }
 
 function closeResizeDrawer() {
