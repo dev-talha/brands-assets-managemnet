@@ -6,7 +6,7 @@
 $file = $group['primary_file'] ?? null;
 $previewUrl = '';
 if ($file) {
-    $previewUrl = '/cdn/file/' . $file['public_token'] . '/' . $file['extension'];
+    $previewUrl = cdn_url('cdn/file/' . $file['public_token'] . '/' . $file['extension']);
 }
 ?>
 <div class="logo-card group bg-white rounded-2xl border border-gray-200 hover:shadow-lg hover:border-gray-300 transition-all duration-300 cursor-pointer relative"

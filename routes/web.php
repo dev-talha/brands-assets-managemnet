@@ -31,9 +31,7 @@ $router->get('/brand/{slug}', [PublicBrandController::class, 'show']);
 // CDN routes (public, no auth)
 $router->get('/cdn/{companySlug}/{theme}/{assetSlug}/{ext}', [CdnController::class, 'latest']);
 $router->get('/cdn/file/{token}/{ext}', [CdnController::class, 'token']);
-$router->get('/test.png', function() {
-    echo "PHP handled this!";
-});
+
 $router->get('/cdn/v/{version}/{assetSlug}/{ext}', [CdnController::class, 'versioned']);
 
 // Download routes
