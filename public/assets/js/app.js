@@ -219,7 +219,9 @@ function openResizeDrawer(url, filename) {
     document.body.style.overflow = 'hidden';
     
     const img = new Image();
-    img.crossOrigin = "Anonymous";
+    if (url.startsWith('http') && !url.includes(window.location.host)) {
+        img.crossOrigin = "Anonymous";
+    }
     img.onload = () => {
         resizeOriginalImage = img;
         resizeOriginalAspectRatio = img.width / img.height;
@@ -238,6 +240,10 @@ function openResizeDrawer(url, filename) {
         
         handleFormatChange();
         updateResizeCanvas();
+    };
+    img.onerror = () => {
+        alert("Failed to load the image for resizing. Please ensure the image exists and is accessible.");
+        closeResizeDrawer();
     };
     img.src = url;
 }

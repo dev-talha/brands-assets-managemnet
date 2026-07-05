@@ -90,8 +90,8 @@
         <main class="flex-1 min-h-[calc(100vh-64px)] <?= isset($company) ? 'ml-0 lg:ml-60' : '' ?>">
             <!-- Flash Messages -->
             <?php $flash = flash(); if ($flash): ?>
-                <div class="mx-4 mt-4">
-                    <div class="toast rounded-lg px-4 py-3 text-sm font-medium shadow-lg
+                <div class="fixed top-4 right-4 z-50">
+                    <div class="toast rounded-lg px-4 py-3 text-sm font-medium shadow-xl
                         <?= $flash['type'] === 'success' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-red-50 text-red-700 border border-red-200' ?>"
                         id="flash-toast">
                         <div class="flex items-center gap-2">
