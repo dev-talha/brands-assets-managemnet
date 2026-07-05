@@ -130,7 +130,7 @@
 function closeFontModal() {
     document.getElementById('add-font-modal').classList.add('hidden');
     document.getElementById('font-form').reset();
-    document.getElementById('font-form').action = "/admin/companies/<?= $company['id'] ?>/fonts";
+    document.getElementById('font-form').action = `${window.APP_URL}/admin/companies/<?= $company['id'] ?>/fonts`;
     document.getElementById('font-modal-title').textContent = 'Add Font';
 }
 function editFont(font) {
@@ -138,7 +138,7 @@ function editFont(font) {
     document.getElementById('font-usage').value = font.usage_type;
     document.getElementById('font-css').value = font.css_value;
     document.getElementById('font-source').value = font.font_source;
-    document.getElementById('font-form').action = `/admin/companies/<?= $company['id'] ?>/fonts/${font.id}/edit`;
+    document.getElementById('font-form').action = `${window.APP_URL}/admin/fonts/${font.id}/update`;
     document.getElementById('font-modal-title').textContent = 'Edit Font';
     document.getElementById('add-font-modal').classList.remove('hidden');
 }

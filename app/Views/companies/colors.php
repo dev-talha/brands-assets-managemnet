@@ -105,7 +105,7 @@
 function closeColorModal() {
     document.getElementById('add-color-modal').classList.add('hidden');
     document.getElementById('color-form').reset();
-    document.getElementById('color-form').action = "/admin/companies/<?= $company['id'] ?>/colors";
+    document.getElementById('color-form').action = `${window.APP_URL}/admin/companies/<?= $company['id'] ?>/colors`;
     document.getElementById('color-modal-title').textContent = 'Add Color';
 }
 function editColor(color) {
@@ -113,7 +113,7 @@ function editColor(color) {
     document.getElementById('color-hex').value = color.hex_code;
     document.getElementById('color-picker').value = color.hex_code;
     document.getElementById('color-type').value = color.color_type;
-    document.getElementById('color-form').action = `/admin/companies/<?= $company['id'] ?>/colors/${color.id}/edit`;
+    document.getElementById('color-form').action = `${window.APP_URL}/admin/colors/${color.id}/update`;
     document.getElementById('color-modal-title').textContent = 'Edit Color';
     document.getElementById('add-color-modal').classList.remove('hidden');
 }

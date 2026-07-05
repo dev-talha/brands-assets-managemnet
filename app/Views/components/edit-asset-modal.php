@@ -66,7 +66,7 @@
     }
 
     function editAsset(asset) {
-        document.getElementById('edit-asset-form').action = `/admin/assets/${asset.id}/update`;
+        document.getElementById('edit-asset-form').action = `${window.APP_URL}/admin/assets/${asset.id}/update`;
         document.getElementById('edit-asset-title').value = asset.title;
         document.getElementById('edit-asset-type').value = asset.asset_type;
         document.getElementById('edit-asset-theme').value = asset.theme;
