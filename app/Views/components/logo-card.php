@@ -6,7 +6,7 @@
 $file = $group['primary_file'] ?? null;
 $previewUrl = '';
 if ($file) {
-    $previewUrl = '/cdn/file/' . $file['public_token'] . '.' . $file['extension'];
+    $previewUrl = '/cdn/file/' . $file['public_token'] . '/' . $file['extension'];
 }
 ?>
 <div class="logo-card group bg-white rounded-2xl border border-gray-200 hover:shadow-lg hover:border-gray-300 transition-all duration-300 cursor-pointer relative"
@@ -33,11 +33,11 @@ if ($file) {
             </button>
             <?php endif; ?>
             <?php if ($file): ?>
-            <button onclick="event.stopPropagation(); copyToClipboard('<?= e(cdn_url('cdn/file/' . $file['public_token'] . '.' . $file['extension'])) ?>')" class="p-2 bg-white/90 backdrop-blur rounded-lg shadow-sm hover:bg-white transition text-gray-700" data-tooltip="Copy CDN Link">
+            <button onclick="event.stopPropagation(); copyToClipboard('<?= e(cdn_url('cdn/file/' . $file['public_token'] . '/' . $file['extension'])) ?>')" class="p-2 bg-white/90 backdrop-blur rounded-lg shadow-sm hover:bg-white transition text-gray-700" data-tooltip="Copy CDN Link">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
             </button>
             <?php if (settings('enable_online_editor', '1') === '1'): ?>
-            <button onclick="event.stopPropagation(); editInPea('<?= e(cdn_url('cdn/file/' . $file['public_token'] . '.' . $file['extension'])) ?>', '<?= e($file['extension']) ?>')" class="p-2 bg-white/90 backdrop-blur rounded-lg shadow-sm hover:bg-brand-50 hover:text-brand-600 transition text-gray-700" data-tooltip="Edit Online">
+            <button onclick="event.stopPropagation(); editInPea('<?= e(cdn_url('cdn/file/' . $file['public_token'] . '/' . $file['extension'])) ?>', '<?= e($file['extension']) ?>')" class="p-2 bg-white/90 backdrop-blur rounded-lg shadow-sm hover:bg-brand-50 hover:text-brand-600 transition text-gray-700" data-tooltip="Edit Online">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
             </button>
             <?php endif; ?>

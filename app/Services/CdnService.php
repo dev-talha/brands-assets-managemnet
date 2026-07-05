@@ -125,9 +125,9 @@ class CdnService
         $baseUrl = rtrim(env('CDN_BASE_URL', env('APP_URL', 'http://localhost:8000')), '/');
 
         return [
-            'latest' => "{$baseUrl}/cdn/{$company['slug']}/{$group['theme']}/{$group['slug']}.{$file['extension']}",
-            'token' => "{$baseUrl}/cdn/file/{$file['public_token']}.{$file['extension']}",
-            'versioned' => "{$baseUrl}/cdn/v/{$file['cache_version']}/{$group['slug']}.{$file['extension']}",
+            'latest' => "{$baseUrl}/cdn/{$company['slug']}/{$group['theme']}/{$group['slug']}/{$file['extension']}",
+            'token' => "{$baseUrl}/cdn/file/{$file['public_token']}/{$file['extension']}",
+            'versioned' => "{$baseUrl}/cdn/v/{$file['cache_version']}/{$group['slug']}/{$file['extension']}",
         ];
     }
 

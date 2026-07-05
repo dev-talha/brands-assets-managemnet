@@ -106,7 +106,7 @@ async function openAssetDrawer(groupId) {
         document.getElementById('drawer-title').textContent = currentAssetGroup.title;
         document.getElementById('drawer-type').textContent = currentAssetGroup.asset_type.toUpperCase() + ' • ' + currentAssetGroup.theme;
         
-        const previewUrl = u(`/cdn/file/${primaryFile.public_token}.${primaryFile.extension}`);
+        const previewUrl = u(`/cdn/file/${primaryFile.public_token}/${primaryFile.extension}`);
         document.getElementById('drawer-preview-img').src = previewUrl;
         
         document.getElementById('drawer-download-all').href = u(`/download/asset/${currentAssetGroup.id}`);
@@ -123,7 +123,7 @@ async function openAssetDrawer(groupId) {
             item.className = `flex items-center justify-between p-3 rounded-xl border ${isPrimary ? 'border-indigo-200 bg-indigo-50' : 'border-gray-100 hover:border-gray-200 cursor-pointer'}`;
             if (!isPrimary) {
                 item.onclick = () => {
-                    document.getElementById('drawer-preview-img').src = u(`/cdn/file/${f.public_token}.${f.extension}`);
+                    document.getElementById('drawer-preview-img').src = u(`/cdn/file/${f.public_token}/${f.extension}`);
                     updateCdnBox(f);
                     // Reset styling
                     Array.from(formatsList.children).forEach(c => {
@@ -146,7 +146,7 @@ async function openAssetDrawer(groupId) {
                 </div>
                 <div class="flex gap-1">
                     ${window.ENABLE_ONLINE_EDITOR ? `
-                    <button type="button" onclick="event.stopPropagation(); editInPea(u('/cdn/file/${f.public_token}.${f.extension}'), '${f.extension}')" class="p-1.5 text-gray-400 hover:text-brand-600 bg-white rounded hover:bg-brand-50 border border-transparent shadow-sm" title="Edit Online">
+                    <button type="button" onclick="event.stopPropagation(); editInPea(u('/cdn/file/${f.public_token}/${f.extension}'), '${f.extension}')" class="p-1.5 text-gray-400 hover:text-brand-600 bg-white rounded hover:bg-brand-50 border border-transparent shadow-sm" title="Edit Online">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
                     </button>
                     ` : ''}

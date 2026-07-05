@@ -101,7 +101,7 @@
                     <div class="p-4 flex items-center gap-3">
                         <div class="w-10 h-10 rounded-lg bg-gray-50 border border-gray-100 flex items-center justify-center shrink-0">
                             <?php if (in_array($upload['extension'], ['svg', 'png', 'jpg', 'jpeg'])): ?>
-                                <img src="<?= e(cdn_url("cdn/file/{$upload['public_token']}.{$upload['extension']}")) ?>" class="max-w-[24px] max-h-[24px] object-contain">
+                                <img src="<?= e(cdn_url("cdn/file/{$upload['public_token']}/{$upload['extension']}")) ?>" class="max-w-[24px] max-h-[24px] object-contain">
                             <?php else: ?>
                                 <span class="text-[10px] font-bold text-gray-400 uppercase"><?= $upload['extension'] ?></span>
                             <?php endif; ?>
