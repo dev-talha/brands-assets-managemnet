@@ -7,4 +7,7 @@
 !/storage/logs/.gitkeep
 /storage/cache/*
 !/storage/cache/.gitkeep
-# We are NOT ignoring database/database.sqlite because you want to include raw data.
+# We are ignoring the database so real data is not pushed
+/database/database.sqlite
+/storage/uploads/*
+!/storage/uploads/.gitkeep

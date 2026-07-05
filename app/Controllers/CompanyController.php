@@ -76,6 +76,7 @@ class CompanyController extends Controller
             'location' => $location,
             'social_links' => json_encode($socialLinks),
             'is_public' => $isPublic,
+            'sort_order' => (int)$this->request->post('sort_order', 0),
             'status' => 'active',
         ];
 
@@ -154,6 +155,7 @@ class CompanyController extends Controller
             'location' => trim($this->request->post('location', '')),
             'social_links' => json_encode($socialLinks),
             'is_public' => $this->request->post('is_public') ? 1 : 0,
+            'sort_order' => (int)$this->request->post('sort_order', 0),
         ];
 
         if (empty($data['name'])) {

@@ -46,7 +46,7 @@ class PublicBrandController extends Controller
 
         // Fetch paginated results
         $companies = db()->query(
-            "SELECT * FROM companies WHERE {$whereClause} ORDER BY name ASC LIMIT {$limit} OFFSET {$offset}",
+            "SELECT * FROM companies WHERE {$whereClause} ORDER BY sort_order ASC, name ASC LIMIT {$limit} OFFSET {$offset}",
             $params
         )->fetchAll();
 
@@ -125,7 +125,7 @@ class PublicBrandController extends Controller
 
         $searchTerm = "%{$search}%";
         $companies = db()->query(
-            "SELECT id, name, slug, domain FROM companies WHERE is_public = 1 AND status = 'active' AND deleted_at IS NULL AND (name LIKE ? OR domain LIKE ?) ORDER BY name ASC LIMIT 10",
+            "SELECT id, name, slug, domain FROM companies WHERE is_public = 1 AND status = 'active' AND deleted_at IS NULL AND (name LIKE ? OR domain LIKE ?) ORDER BY sort_order ASC, name ASC LIMIT 10",
             [$searchTerm, $searchTerm]
         )->fetchAll();
 

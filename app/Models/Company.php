@@ -35,7 +35,7 @@ class Company
             $params[] = (int) $filters['is_public'];
         }
 
-        $sql .= ' ORDER BY name ASC';
+        $sql .= ' ORDER BY sort_order ASC, name ASC';
 
         if (isset($filters['limit'])) {
             $sql .= ' LIMIT ?';
